@@ -3,34 +3,34 @@ provider "aws" {
 }
 
 variable "vpc_id"{
-  default = "vpc-002f247096d9dfc84"
+  default = "vpc-03e45db2ed2e3291c"
 
 }
 
 //az1 subnet variable
 variable "pa_az1_mgt_subnet_id"{
-  default = "subnet-011d13fbc8ada93fa"
+  default = "subnet-0c7a46468eb697362"
 }
 
 variable "pa_az1_GWLB_subnet_id"{
-  default = "subnet-055c415d80fa4e985"
+  default = "subnet-0b79d3bb1ce1f5022"
 }
 
 variable "pa_az1_public_subnet_id"{
-  default = "subnet-078ac3de4aaa5d848"
+  default = "subnet-0de0e5c7b0fd2cf38"
 }
 
 //az2 subnet variable
 variable "pa_az2_mgt_subnet_id"{
-  default = "subnet-018771aaae071aebc"
+  default = "subnet-03be93e5ef3a6bf0b"
 }
 
 variable "pa_az2_public_subnet_id"{
-  default = "subnet-0719faa9d862bffe0"
+  default = "subnet-0531ea46f2b6b5aac"
 }
 
 variable "pa_az2_GWLB_subnet_id"{
-  default = "subnet-0a0d12ec547a4bbaf"
+  default = "subnet-0b3af5233fa0257ed"
 }
 
 //security group
@@ -123,7 +123,7 @@ resource "aws_network_interface" "pa-az1-mgt" {
 }
 
 resource "aws_network_interface" "pa-az1-GWLB" {
-  subnet_id       = var.pa_az1_GWLB_subnet_id
+  subnet_id       = var.pa_az1_GWLB_subnet_id_id
   security_groups = [aws_security_group.allow-pa-traffic-sg-iac.id]
   source_dest_check = false
   description = "PA-AZ1-GWLB"
@@ -156,7 +156,7 @@ resource "aws_network_interface" "pa-az2-mgt" {
 }
 
 resource "aws_network_interface" "pa-az2-GWLB" {
-  subnet_id       = var.pa_az2_GWLB_subnet_id
+  subnet_id       = var.pa_az2_GWLB_subnet_id_id
   security_groups = [aws_security_group.allow-pa-traffic-sg-iac.id]
   source_dest_check = false
   description = "PA-AZ2-GWLB"
@@ -180,7 +180,7 @@ resource "aws_network_interface" "pa-az2-Untrust" {
 //instance
 resource "aws_instance" "az1_paloalto" {
   ami = "ami-03c43a54eb66418b3"
-  instance_type = "c5.xlarge"
+  instance_type = "m5.2xlarge"
   key_name = "juwon-aws-key-2023"
   availability_zone = "ap-northeast-2a"
   user_data = "mgmt-interface-swap=enable"
@@ -212,7 +212,7 @@ resource "aws_instance" "az1_paloalto" {
 
 resource "aws_instance" "az2_paloalto" {
   ami = "ami-03c43a54eb66418b3"
-  instance_type = "c5.xlarge"
+  instance_type = "m5.2xlarge"
   key_name = "juwon-aws-key-2023"
   availability_zone = "ap-northeast-2c"
   user_data = "mgmt-interface-swap=enable"
