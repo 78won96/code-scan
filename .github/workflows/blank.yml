@@ -28,9 +28,7 @@ jobs:
 
 # Results are generated only on a success or failure
 # this is required since GitHub by default won't run the next step
-# when the previous one has failed. Alternatively, enable soft_fail in
-
-checkov action.
+# when the previous one has failed. Alternatively, enable soft_fail in checkov action.
    if: success() || failure()
    with:
      sarif_file: results.sarif
